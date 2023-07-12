@@ -1,0 +1,69 @@
+in [33]:
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+import datetime 
+import matplotlib.dates as md
+df=pd.read_csv('pollution.csv')
+df.head()
+
+	created_at	entry_id	Kottige palya	Banglore	Karnataka
+0	26-06-2023 07:59	167601.0	2.562637	3.015531	2.758462
+1	26-06-2023 08:00	167602.0	2.565861	3.016337	2.761685
+2	26-06-2023 08:00	167603.0	2.569890	3.019560	2.764103
+3	26-06-2023 08:01	167604.0	2.573114	3.019560	2.766520
+4	26-06-2023 08:02	167605.0	2.576337	3.019560	2.768132
+df.drop("entry_id",axis=1,inplace=True)
+df.head()
+
+
+created_at	Kottige palya	Banglore	Karnataka
+0	26-06-2023  07:59	2.562637	3.015531	2.758462
+1	26-06-2023  08:00	2.565861	3.016337	2.761685
+2	26-06-2023  08:00	2.569890	3.019560	2.764103
+3	26-06-2023  08:01	2.573114	3.019560	2.766520
+4	26-06-2023  08:02	2.576337	3.019560	2.768132
+ #finding out the time when max. pollution occurs at Chadni Chowk
+df[df['Kottige palya']==3.0235897439999997].drop(['Banglore','Karnataka'],axis=1)
+created_at	Kottige palya
+297	26-06-2023  10:53	3.02359
+ #finding out the time when max. pollution occurs at Banglore
+df[df['Bnaglore']==3.0235897439999997].drop(['kOTTIGE PALYA','KARNATAKA'],axis=1)
+created_at	Banglore
+97	26-06-2023  09:11	3.02359
+397	26-06-2023  12:14	3.02359
+ #finding out the time when max. pollution occurs at Karnataka
+df[df['Banglore']==3.0235897439999997].drop(['Kottige paluya','Banglore'],axis=1)
+created_at	Banglore 297	26-06-2023  10:53	3.02359
+#finding out pollution level at Kottige palya by hourly update
+plt.figure(figsize=(12,8))
+plt.rcParams.update({'font.size':15})
+x =pd.to_datetime(df['created_at'])
+y=df['Kottige palya']
+plt.plot_date(x, y)
+plt.xlabel("Data & Hour")
+plt.ylabel("Pollution Level")
+plt.title("Hourly Pollution Level at Kottige palya")\
+
+#finding out pollution level at Banglore by hourly update
+plt.figure(figolor='green')
+plt.xlabel("Data & Hour")
+plt.ylabel("Pollution Level")
+plt.title("Hourly Pollution Level at Bnaglore")
+
+#finding out pollution level at Karnataka by hourly update
+plt.figure(figsize=(12,8))
+plt.rcParams.update({'font.size':15})
+x =pd.to_datetime(df['created_at'])
+y=df['Karnataka']
+plt.plot_date(x, y,color='red')
+plt.xlabel("Data & Hour")
+plt.ylabel("Pollution Level")
+plt.title("Hourly Pollution Level at Karnataka")
+size=(12,8))
+plt.rcParams.update({'font.size':15})
+x =pd.to_datetime(df['created_at'])
+y=df['Banglore']
+plt.plot_date(x, y,c
